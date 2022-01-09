@@ -26,9 +26,9 @@
 namespace adg2188
 {
 
-Driver::Driver()
+Driver::Driver(I2C_TypeDef *i2c_handle)
 {
-    _i2c_handle = std::unique_ptr<I2C_TypeDef>(I2C2);
+    _i2c_handle = std::unique_ptr<I2C_TypeDef>(i2c_handle);
     probe_i2c();
 
     // close/open asynchronously, i.e. one at a time
