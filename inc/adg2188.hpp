@@ -35,14 +35,16 @@
 #endif
 
 #include <memory>
-
 #include <ll_i2c_utils.hpp>
+
+// disable dynamic allocation/copying
+#include <ControlledBase.hpp>
 
 namespace adg2188
 {
 
 // @brief Class to control the ADG2188 CrossPoint "Analog Switch Array" 
-class Driver
+class Driver : public ControlledBase
 {
 public:
     Driver(I2C_TypeDef *i2c_handle);
