@@ -30,32 +30,109 @@ Driver::Driver(I2C_TypeDef *i2c_handle)
 {
     _i2c_handle = std::unique_ptr<I2C_TypeDef>(i2c_handle);
     probe_i2c();
+    clear_all();
 
-    // close/open asynchronously, i.e. one at a time
-    read_xline_switch_values(XLineRead::X2);
-    write_switch(Throw::close, Pole::x2_to_y0, Latch::set);
-    read_xline_switch_values(XLineRead::X2);
-    read_xline_switch_values(XLineRead::X1);
-    write_switch(Throw::close, Pole::x1_to_y0, Latch::set);
-    read_xline_switch_values(XLineRead::X1);
-    read_xline_switch_values(XLineRead::X2);
-    write_switch(Throw::open, Pole::x2_to_y0, Latch::set);
-    read_xline_switch_values(XLineRead::X2);
-    read_xline_switch_values(XLineRead::X1);
-    write_switch(Throw::open, Pole::x1_to_y0, Latch::set);
-    read_xline_switch_values(XLineRead::X1);
+    // // close/open asynchronously, i.e. one at a time
+    // read_xline_switch_values(XLineRead::X2);
+    // write_switch(Throw::close, Pole::x2_to_y0, Latch::set);
+    // read_xline_switch_values(XLineRead::X2);
+    // read_xline_switch_values(XLineRead::X1);
+    // write_switch(Throw::close, Pole::x1_to_y0, Latch::set);
+    // read_xline_switch_values(XLineRead::X1);
+    // read_xline_switch_values(XLineRead::X2);
+    // write_switch(Throw::open, Pole::x2_to_y0, Latch::set);
+    // read_xline_switch_values(XLineRead::X2);
+    // read_xline_switch_values(XLineRead::X1);
+    // write_switch(Throw::open, Pole::x1_to_y0, Latch::set);
+    // read_xline_switch_values(XLineRead::X1);
 
-    // close/open synchronously, i.e. at the same time
-    read_xline_switch_values(XLineRead::X1);
-    read_xline_switch_values(XLineRead::X2);
-    write_switch(Throw::close, Pole::x2_to_y0, Latch::reset);
-    write_switch(Throw::close, Pole::x1_to_y0, Latch::set);
+    // // close/open synchronously, i.e. at the same time
+    // read_xline_switch_values(XLineRead::X1);
+    // read_xline_switch_values(XLineRead::X2);
+    // write_switch(Throw::close, Pole::x2_to_y0, Latch::reset);
+    // write_switch(Throw::close, Pole::x1_to_y0, Latch::set);
     
-    write_switch(Throw::open, Pole::x2_to_y0, Latch::reset);
-    write_switch(Throw::open, Pole::x1_to_y0, Latch::set);
-    read_xline_switch_values(XLineRead::X1);
-    read_xline_switch_values(XLineRead::X2);    
+    // write_switch(Throw::open, Pole::x2_to_y0, Latch::reset);
+    // write_switch(Throw::open, Pole::x1_to_y0, Latch::set);
+    // read_xline_switch_values(XLineRead::X1);
+    // read_xline_switch_values(XLineRead::X2);    
 
+}
+
+bool Driver::clear_all()
+{
+    write_switch(Throw::open, Pole::x0_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y0, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y0, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y1, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y1, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y2, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y2, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y3, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y3, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y4, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y4, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y5, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y5, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y6, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y6, Latch::set);
+
+    write_switch(Throw::open, Pole::x0_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x1_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x2_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x3_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x4_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x5_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x6_to_y7, Latch::set);
+    write_switch(Throw::open, Pole::x7_to_y7, Latch::set);                        
+    return true;
 }
 
 bool Driver::probe_i2c()

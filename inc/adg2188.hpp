@@ -136,29 +136,30 @@ public:
         x5_to_y6    = 0x2E,
         x5_to_y7    = 0x2F,
 
-        x6_to_y0    = 0x30,
-        x6_to_y1    = 0x31,
-        x6_to_y2    = 0x32,
-        x6_to_y3    = 0x33,
-        x6_to_y4    = 0x34,
-        x6_to_y5    = 0x35,
-        x6_to_y6    = 0x36,
-        x6_to_y7    = 0x37,
+        x6_to_y0    = 0x40,
+        x6_to_y1    = 0x41,
+        x6_to_y2    = 0x42,
+        x6_to_y3    = 0x43,
+        x6_to_y4    = 0x44,
+        x6_to_y5    = 0x45,
+        x6_to_y6    = 0x46,
+        x6_to_y7    = 0x47,
 
-        x7_to_y0    = 0x38,
-        x7_to_y1    = 0x39,
-        x7_to_y2    = 0x3A,
-        x7_to_y3    = 0x3B,
-        x7_to_y4    = 0x3C,
-        x7_to_y5    = 0x3D,
-        x7_to_y6    = 0x3E,
-        x7_to_y7    = 0x3F,
+        x7_to_y0    = 0x48,
+        x7_to_y1    = 0x49,
+        x7_to_y2    = 0x4A,
+        x7_to_y3    = 0x4B,
+        x7_to_y4    = 0x4C,
+        x7_to_y5    = 0x4D,
+        x7_to_y6    = 0x4E,
+        x7_to_y7    = 0x4F,
     };
 
 
     bool probe_i2c();
 
     bool write_switch(const Throw &sw_throw, const Pole &sw_pole, const Latch &sw_latch);
+    bool clear_all();
     //bool sync_set_all_switches();
     bool read_xline_switch_values(XLineRead line);
 
