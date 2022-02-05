@@ -155,12 +155,22 @@ public:
         x7_to_y7    = 0x4F,
     };
 
-
     bool probe_i2c();
 
+    // @brief Tell the crosspoint IC to open or close a switch pole
+    // @param sw_throw Throw::open or Throw::close
+    // @param sw_pole The x and y pole configuration to throw
+    // @param sw_latch Set the switch now or not
+    // @return Always true
     bool write_switch(const Throw &sw_throw, const Pole &sw_pole, const Latch &sw_latch);
+
+    // @brief Opens all switch poles.
+    // @return Always true
     bool clear_all();
-    //bool sync_set_all_switches();
+
+    // @brief Read the register. Useful for debuggin.
+    // @param line The all the X poles from the switch
+    // @return always True
     bool read_xline_switch_values(XLineRead line);
 
 
