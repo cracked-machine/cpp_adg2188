@@ -24,14 +24,14 @@
 #define __ADG2188_HPP__
 
 // These are required cube-generated source files
-#if defined(USE_SSD1306_HAL_DRIVER) || defined(USE_SSD1306_LL_DRIVER)
-
+#if defined(X86_UNIT_TESTING_ONLY)
+    // unit tests
+#else
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wvolatile"
 		#include "main.h"
 		#include "i2c.h"	
 	#pragma GCC diagnostic pop
-
 #endif
 
 #include <memory>
