@@ -149,12 +149,14 @@ bool Driver::probe_i2c()
 }
 
 // See page 20 of https://www.analog.com/media/en/technical-documentation/data-sheets/adg2188.pdf
-bool Driver::write_switch(const Throw &sw_throw, const Pole &sw_pole, const Latch &sw_latch)
+bool Driver::write_switch(const Throw &sw_throw [[maybe_unused]], const Pole &sw_pole [[maybe_unused]], const Latch &sw_latch [[maybe_unused]])
 {
+    bool success {true};
+
+#if not defined(X86_UNIT_TESTING_ONLY)
     // read this number of bytes
 	LL_I2C_SetTransferSize(_i2c_handle.get(), 2);
 
-    bool success {true};
 
     // check ADG2188 is listening on 0xE0 + 1.
 	if (stm32::i2c::send_addr(_i2c_handle, i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
@@ -177,19 +179,19 @@ bool Driver::write_switch(const Throw &sw_throw, const Pole &sw_pole, const Latc
     
 
     LL_I2C_GenerateStopCondition(_i2c_handle.get());
+#endif
 
     return success;
-
-
 }
 
 // See page 22 of https://www.analog.com/media/en/technical-documentation/data-sheets/adg2188.pdf
-bool Driver::read_xline_switch_values(XLineRead line)
+bool Driver::read_xline_switch_values(XLineRead line [[maybe_unused]])
 {
+    bool success {true};
+
+#if not defined(X86_UNIT_TESTING_ONLY)
     // read this number of bytes
 	LL_I2C_SetTransferSize(_i2c_handle.get(), 2);
-
-    bool success {true};
 
     // check ADG2188 is listening on 0xE0 + 1.
 	if (stm32::i2c::send_addr(_i2c_handle, i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
@@ -218,7 +220,7 @@ bool Driver::read_xline_switch_values(XLineRead line)
     stm32::i2c::receive_byte(_i2c_handle, rx_byte2);
     LL_I2C_AcknowledgeNextData(_i2c_handle.get(), LL_I2C_NACK);
     LL_I2C_GenerateStopCondition(_i2c_handle.get());
-
+#endif
     return success;
 }
 
