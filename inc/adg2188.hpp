@@ -27,13 +27,9 @@
 #if defined(X86_UNIT_TESTING_ONLY)
     // unit tests
 #else
-	#pragma GCC diagnostic push
-	#pragma GCC diagnostic ignored "-Wvolatile"
-		#include "main.h"
-		#include "i2c.h"	
-	#pragma GCC diagnostic pop
+    // arm only dependencies
 #endif
-
+    
 #include <memory>
 #include <ll_i2c_utils.hpp>
 
