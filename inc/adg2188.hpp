@@ -31,7 +31,7 @@
 #endif
     
 #include <memory>
-#include <ll_i2c_utils.hpp>
+#include <i2c_utils.hpp>
 
 // disable dynamic allocation/copying
 #include <allocation_restricted_base.hpp>
