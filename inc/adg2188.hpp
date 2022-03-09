@@ -27,7 +27,7 @@
 #if defined(X86_UNIT_TESTING_ONLY)
     // unit tests
 #else
-    // arm only dependencies
+
 #endif
     
 #include <memory>
@@ -174,7 +174,7 @@ public:
 private:
 
     uint8_t i2c_addr { 0xE0 };
-    std::unique_ptr<I2C_TypeDef> _i2c_handle;
+    std::unique_ptr<I2C_TypeDef> m_i2c_handle;
 };
 
 } // namespace adg2188
