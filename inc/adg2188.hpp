@@ -42,7 +42,7 @@ namespace adg2188
 class Driver : public RestrictedBase
 {
 public:
-    Driver(I2C_TypeDef *i2c_handle);
+    explicit Driver(I2C_TypeDef *i2c_handle);
     
     // @brief prevent copy construction of the I2C handle pointer
     Driver(Driver const &other) = delete;
