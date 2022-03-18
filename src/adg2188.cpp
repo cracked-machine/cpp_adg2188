@@ -28,7 +28,8 @@ namespace adg2188
 
 Driver::Driver(I2C_TypeDef *i2c_handle)
 {
-    m_i2c_handle = std::unique_ptr<I2C_TypeDef>(i2c_handle);
+    // m_i2c_handle = std::unique_ptr<I2C_TypeDef>(i2c_handle);
+    m_i2c_handle = i2c_handle;
     probe_i2c();
     clear_all();
 
@@ -140,7 +141,7 @@ bool Driver::probe_i2c()
 	bool success {true};
 
     // check ADG2188 is listening on 0xE0.
-	if (stm32::i2c::send_addr(m_i2c_handle.get(), i2c_addr, stm32::i2c::MsgType::PROBE) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::PROBE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }
@@ -155,29 +156,29 @@ bool Driver::write_switch(const Throw &sw_throw [[maybe_unused]], const Pole &sw
 
 #if not defined(X86_UNIT_TESTING_ONLY)
     // write this number of bytes: The data byte(s) AND the address byte
-    stm32::i2c::set_numbytes(m_i2c_handle.get(), 2);
+    stm32::i2c::set_numbytes(m_i2c_handle, 2);
 
     // check ADG2188 is listening on 0xE0 + 1.
-	if (stm32::i2c::send_addr(m_i2c_handle.get(), i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }    
 
     // switch config byte
     uint8_t switch_configuration = (static_cast<uint8_t>(sw_throw) | static_cast<uint8_t>(sw_pole));
-    stm32::i2c::send_byte(m_i2c_handle.get(), switch_configuration);
+    stm32::i2c::send_byte(m_i2c_handle, switch_configuration);
     // latch byte
     if (sw_latch == Latch::set)
     {
-        stm32::i2c::send_byte(m_i2c_handle.get(), 0x01);
+        stm32::i2c::send_byte(m_i2c_handle, 0x01);
     }
     else
     {
-        stm32::i2c::send_byte(m_i2c_handle.get(), 0x00);
+        stm32::i2c::send_byte(m_i2c_handle, 0x00);
     }
     
     // Generate the stop condition
-	stm32::i2c::generate_stop_condition(m_i2c_handle.get());
+	stm32::i2c::generate_stop_condition(m_i2c_handle);
 #endif
 
     return success;
@@ -190,37 +191,37 @@ bool Driver::read_xline_switch_values(XLineRead line [[maybe_unused]])
 
 #if not defined(X86_UNIT_TESTING_ONLY)
     // write this number of bytes: The data byte(s) AND the address byte
-	stm32::i2c::set_numbytes(m_i2c_handle.get(), 2);
+	stm32::i2c::set_numbytes(m_i2c_handle, 2);
 
     // check ADG2188 is listening on 0xE0 + 1.
-	if (stm32::i2c::send_addr(m_i2c_handle.get(), i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }
     // request the xline we want to read (second byte is don't care, so just repeat it)
-    stm32::i2c::send_byte(m_i2c_handle.get(), static_cast<uint8_t>(line));
-    stm32::i2c::send_byte(m_i2c_handle.get(), static_cast<uint8_t>(line));
+    stm32::i2c::send_byte(m_i2c_handle, static_cast<uint8_t>(line));
+    stm32::i2c::send_byte(m_i2c_handle, static_cast<uint8_t>(line));
     
     // Generate the stop condition
-	stm32::i2c::generate_stop_condition(m_i2c_handle.get());
+	stm32::i2c::generate_stop_condition(m_i2c_handle);
 
     // check ADG2188 is listening on 0xE0 + 0.
-	if (stm32::i2c::send_addr(m_i2c_handle.get(), i2c_addr, stm32::i2c::MsgType::READ) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::READ) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }    
 
     // receive the first byte and send back ACk to slave
     uint8_t rx_byte1 {0};
-    stm32::i2c::receive_byte(m_i2c_handle.get(), rx_byte1);
-    stm32::i2c::send_ack(m_i2c_handle.get());
+    stm32::i2c::receive_byte(m_i2c_handle, rx_byte1);
+    stm32::i2c::send_ack(m_i2c_handle);
 
     // receive the second byte, send NACK and STOP to slave
     uint8_t rx_byte2 {0};
-    stm32::i2c::receive_byte(m_i2c_handle.get(), rx_byte2);
-    stm32::i2c::send_nack(m_i2c_handle.get());
+    stm32::i2c::receive_byte(m_i2c_handle, rx_byte2);
+    stm32::i2c::send_nack(m_i2c_handle);
     
-	stm32::i2c::generate_stop_condition(m_i2c_handle.get());
+	stm32::i2c::generate_stop_condition(m_i2c_handle);
 #endif
     return success;
 }

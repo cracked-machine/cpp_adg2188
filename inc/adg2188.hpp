@@ -30,7 +30,6 @@
 
 #endif
     
-#include <memory>
 #include <i2c_utils.hpp>
 
 // disable dynamic allocation/copying
@@ -174,7 +173,8 @@ public:
 private:
 
     uint8_t i2c_addr { 0xE0 };
-    std::unique_ptr<I2C_TypeDef> m_i2c_handle;
+    // std::unique_ptr<I2C_TypeDef> m_i2c_handle;
+    I2C_TypeDef* m_i2c_handle;
 };
 
 } // namespace adg2188
