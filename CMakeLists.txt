@@ -20,9 +20,6 @@ if(CMAKE_PROJECT_NAME STREQUAL ADG2188_TEST_SUITE)
     target_link_libraries(${BUILD_NAME} PRIVATE Catch2::Catch2WithMain)
     add_subdirectory(tests)
 
-    target_include_directories(${BUILD_NAME} PRIVATE 
-        ${CMAKE_BINARY_DIR}/embedded_utils/include
-    )
 
 endif()
 
