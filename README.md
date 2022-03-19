@@ -22,7 +22,13 @@ Include this repo into your project as a submodule and add the following line to
 
 `add_subdirectory(embedded_utils)`
 
-This assumes your top-level CMakeFiles.txt is already configured for STM32 platform.
+This assumes your project's top-level CMakeFiles.txt is already configured for STM32 platform.
 
+### Debug
 
+`GDB` is enabled in VSCode (F5)
+
+### Code Coverage report
+
+Run the "coverage report" task. Results can be found in `coverage` directory.
 
