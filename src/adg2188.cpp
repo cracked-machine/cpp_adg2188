@@ -141,10 +141,12 @@ bool Driver::probe_i2c()
 	bool success {true};
 
     // check ADG2188 is listening on 0xE0.
+    #ifndef X86_UNIT_TESTING_ONLY
 	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::PROBE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }
+    #endif
     return success;
 
 }

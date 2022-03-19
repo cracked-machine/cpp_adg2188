@@ -26,6 +26,7 @@
 // These are required cube-generated source files
 #if defined(X86_UNIT_TESTING_ONLY)
     // unit tests
+    #include <mock_cmsis.hpp>
 #else
 
 #endif
