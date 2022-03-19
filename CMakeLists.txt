@@ -7,13 +7,16 @@ project(ADG2188_TEST_SUITE VERSION 0.1 DESCRIPTION "ADG2188_TEST_SUITE")
 if(CMAKE_PROJECT_NAME STREQUAL ADG2188_TEST_SUITE)
 
     include(cmake/linux.cmake)
-    
+
     # BUILD_NAME is set in cmake/linux.cmake
     add_executable(${BUILD_NAME} "")
-
-    include(cmake/external.cmake)
-    include(cmake/cppcheck.cmake)
     target_compile_features(${BUILD_NAME} PUBLIC cxx_std_20)
+
+    # add external deps from git repos
+    include(cmake/external.cmake)
+
+    # enable static analysis
+    include(cmake/cppcheck.cmake)
 
     # add catch2 test lib and unit test
     find_package(Catch2 3 REQUIRED)
