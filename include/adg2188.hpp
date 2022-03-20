@@ -23,9 +23,9 @@
 #ifndef __ADG2188_HPP__
 #define __ADG2188_HPP__
 
-// These are required cube-generated source files
-#if defined(X86_UNIT_TESTING_ONLY)
-    // unit tests
+
+#ifdef X86_UNIT_TESTING_ONLY
+    // This file should contain CMSIS bit definitions
     #include <mock_cmsis.hpp>
 #else
 
