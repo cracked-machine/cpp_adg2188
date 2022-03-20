@@ -141,14 +141,11 @@ bool Driver::probe_i2c()
 	bool success {true};
 
     // check ADG2188 is listening on 0xE0.
-    #ifndef X86_UNIT_TESTING_ONLY
 	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::PROBE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }
-    #endif
     return success;
-
 }
 
 // See page 20 of https://www.analog.com/media/en/technical-documentation/data-sheets/adg2188.pdf
@@ -156,7 +153,6 @@ bool Driver::write_switch(const Throw &sw_throw [[maybe_unused]], const Pole &sw
 {
     bool success {true};
 
-#if not defined(X86_UNIT_TESTING_ONLY)
     // write this number of bytes: The data byte(s) AND the address byte
     stm32::i2c::set_numbytes(m_i2c_handle, 2);
 
@@ -181,8 +177,6 @@ bool Driver::write_switch(const Throw &sw_throw [[maybe_unused]], const Pole &sw
     
     // Generate the stop condition
 	stm32::i2c::generate_stop_condition(m_i2c_handle);
-#endif
-
     return success;
 }
 
@@ -191,7 +185,6 @@ bool Driver::read_xline_switch_values(XLineRead line [[maybe_unused]])
 {
     bool success {true};
 
-#if not defined(X86_UNIT_TESTING_ONLY)
     // write this number of bytes: The data byte(s) AND the address byte
 	stm32::i2c::set_numbytes(m_i2c_handle, 2);
 
@@ -224,7 +217,6 @@ bool Driver::read_xline_switch_values(XLineRead line [[maybe_unused]])
     stm32::i2c::send_nack(m_i2c_handle);
     
 	stm32::i2c::generate_stop_condition(m_i2c_handle);
-#endif
     return success;
 }
 
