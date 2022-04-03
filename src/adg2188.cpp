@@ -141,7 +141,7 @@ bool Driver::probe_i2c()
 	bool success {true};
 
     // check ADG2188 is listening on 0xE0.
-	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::PROBE) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::initialise_slave_device(m_i2c_handle, i2c_addr, stm32::i2c::StartType::PROBE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }
@@ -157,7 +157,7 @@ bool Driver::write_switch(const Throw &sw_throw [[maybe_unused]], const Pole &sw
     stm32::i2c::set_numbytes(m_i2c_handle, 2);
 
     // check ADG2188 is listening on 0xE0 + 1.
-	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::initialise_slave_device(m_i2c_handle, i2c_addr, stm32::i2c::StartType::WRITE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }    
@@ -189,7 +189,7 @@ bool Driver::read_xline_switch_values(XLineRead line [[maybe_unused]])
 	stm32::i2c::set_numbytes(m_i2c_handle, 2);
 
     // check ADG2188 is listening on 0xE0 + 1.
-	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::WRITE) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::initialise_slave_device(m_i2c_handle, i2c_addr, stm32::i2c::StartType::WRITE) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }
@@ -201,7 +201,7 @@ bool Driver::read_xline_switch_values(XLineRead line [[maybe_unused]])
 	stm32::i2c::generate_stop_condition(m_i2c_handle);
 
     // check ADG2188 is listening on 0xE0 + 0.
-	if (stm32::i2c::send_addr(m_i2c_handle, i2c_addr, stm32::i2c::MsgType::READ) == stm32::i2c::Status::NACK) 
+	if (stm32::i2c::initialise_slave_device(m_i2c_handle, i2c_addr, stm32::i2c::StartType::READ) == stm32::i2c::Status::NACK) 
     {
         success = false;
     }    
