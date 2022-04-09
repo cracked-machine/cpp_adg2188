@@ -25,5 +25,5 @@ include(cmake/external.cmake)
 2. Explicitly add [cpp_adg2188](https://github.com/cracked-machine/cpp_adg2188.git) to your project as a submodule and add the subdirectory:
 
 ```
-add_subdirectory(extern/embedded_utils)
+add_subdirectory(cpp_adg2188)
 ```
