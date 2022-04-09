@@ -22,7 +22,7 @@ add_executable(${BUILD_NAME} "")
 include(cmake/external.cmake)
 ```
 
-2. Explicitly add [embedded_utils](https://github.com/cracked-machine/embedded_utils.git) to your project as a submodule and add the subdirectory:
+2. Explicitly add [cpp_adg2188](https://github.com/cracked-machine/cpp_adg2188.git) to your project as a submodule and add the subdirectory:
 
 ```
 add_subdirectory(extern/embedded_utils)
