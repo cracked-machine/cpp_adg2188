@@ -22,19 +22,12 @@
 
 #ifndef __ADG2188_HPP__
 #define __ADG2188_HPP__
-
-
-#ifdef X86_UNIT_TESTING_ONLY
-    // This file should contain CMSIS bit definitions
-    #include <mock_cmsis.hpp>
-#else
-
-#endif
     
 #include <i2c_utils.hpp>
 
 // disable dynamic allocation/copying
 #include <restricted_base.hpp>
+
 
 namespace adg2188
 {
