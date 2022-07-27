@@ -17,3 +17,7 @@ Add this repo ([cpp_adg2188](https://github.com/cracked-machine/cpp_adg2188.git)
 ```
 add_subdirectory(cpp_adg2188)
 ```
+
+#### External Dependencies
+
+[Embedded Utils](https://github.com/cracked-machine/embedded_utils)
